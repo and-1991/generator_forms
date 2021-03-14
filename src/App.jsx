@@ -15,7 +15,7 @@ const App = () => {
     if(page === CONFIG) {
       setFormConfig('')
     }
-  }, [])
+  }, [count])
 
   const handleChange = (value) => {
     if(typeof(value) === 'object') {
