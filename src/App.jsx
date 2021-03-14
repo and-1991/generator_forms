@@ -7,9 +7,11 @@ import Result from './containers/Result';
 const App = () => {
   const [pageState, setPageState] = useState(CONFIG);
   const [formConfig, setFormConfig] = useState('');
+  const [count, setCount] = useState(0);
 
   const switchPage = useCallback((page) =>{
     setPageState(page)
+    setCount(count + 1)
     if(page === CONFIG) {
       setFormConfig('')
     }
@@ -40,7 +42,7 @@ const App = () => {
           </Tab>
         </Tabs>
         <WrapperPages>
-          {pageState === CONFIG && <Config formConfig={formConfig} handleChange={handleChange}/>}
+          {pageState === CONFIG && <Config handleChange={handleChange} count={count}/>}
           {pageState === RESULT && <Result formConfig={formConfig}/>}
         </WrapperPages>
       </Wrapper>

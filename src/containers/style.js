@@ -13,7 +13,14 @@ export const Wrapper = styled.form`
   }
 `;
 
-export const WrapperTextArea = styled.div``
+export const WrapperButtons = styled.div`
+    display: flex;
+  justify-content: flex-end;
+  > button {
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+`
 
 export const EmptyResult = styled.div``;
 

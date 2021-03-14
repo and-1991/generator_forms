@@ -1,10 +1,11 @@
 import React, { useState, createRef } from 'react';
-import {Wrapper, WrapperTextArea, Error} from './style';
+import {Wrapper, WrapperButtons, Error} from './style';
 import TextArea from "../components/TextArea";
 import Button from "../components/Button";
+import { startValue } from "../utils";
 
-const Config = ({ handleChange }) => {
-    const [ value, setValue ] = useState('');
+const Config = ({ handleChange, count = 0 }) => {
+    const [ value, setValue ] = useState(count === 0 ? startValue : '');
     const textareaRef = createRef();
     const [error, setError] = useState(null)
 
@@ -27,20 +28,24 @@ const Config = ({ handleChange }) => {
 
     return (
             <Wrapper>
-                <WrapperTextArea>
+                <div>
                     <TextArea ref={textareaRef} value={value} onChange={changeValue} onKeyDown={onKeyDown}/>
                     {error && (
                             <Error>{error}</Error>
                     )}
-                </WrapperTextArea>
-                <Button text='apply' onClick={() => {
-                    try {
-                        const a = eval('(' + value + ')');
-                        handleChange(a)
-                    } catch (err) {
-                        setError("value is dirty")
-                    }
-                }}/>
+                </div>
+                <WrapperButtons>
+                    {value !== '' && value ? <Button type="button" text="Clear" onClick={() => setValue('')}/> : null}
+                    <Button text='apply' onClick={() => {
+                        try {
+                            const a = eval('(' + value + ')');
+                            handleChange(a)
+                        } catch (err) {
+                            setError("value is dirty")
+                        }
+                    }}/>
+                </WrapperButtons>
+
             </Wrapper>
     )
 };
