@@ -1,3 +1,4 @@
+/* eslint no-eval: 0 */
 import React, { useState, createRef } from 'react';
 import {Wrapper, WrapperButtons, Error} from './style';
 import TextArea from "../components/TextArea";
